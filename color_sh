@@ -1,0 +1,38 @@
+#!/bin/bash
+# sh compatible
+#----------------------------------------------------------------------------+
+#Color picker, usage: printf $BLD$CUR$RED$BBLU'Hello World!'$DEF             |
+#-----------------------------+------------------------------------+---------+
+#         Text color          |         Background color           |         |
+#-------------+---------------+----------------+-------------------+         |
+# Base color  | Lighter shade | Base color     | Lighter shade     |         |
+#-------------+---------------+----------------+-------------------+         |
+BLK='\033[30m'; blk='\033[90m'; BBLK='\033[40m'; bblk='\033[100m' #| Black   |
+RED='\033[31m'; red='\033[91m'; BRED='\033[41m'; bred='\033[101m' #| Red     |
+GRN='\033[32m'; grn='\033[92m'; BGRN='\033[42m'; bgrn='\033[102m' #| Green   |
+YLW='\033[33m'; ylw='\033[93m'; BYLW='\033[43m'; bylw='\033[103m' #| Yellow  |
+BLU='\033[34m'; blu='\033[94m'; BBLU='\033[44m'; bblu='\033[104m' #| Blue    |
+MGN='\033[35m'; mgn='\033[95m'; BMGN='\033[45m'; bmgn='\033[105m' #| Magenta |
+CYN='\033[36m'; cyn='\033[96m'; BCYN='\033[46m'; bcyn='\033[106m' #| Cyan    |
+WHT='\033[37m'; wht='\033[97m'; BWHT='\033[47m'; bwht='\033[107m' #| White   |
+#-------------------------------{ Effects }------------------------+---------+
+DEF='\033[0m'   #Default color and effects                                   |
+BLD='\033[1m'   #Bold\brighter                                               |
+DIM='\033[2m'   #Dim\darker                                                  |
+CUR='\033[3m'   #Italic font                                                 |
+UND='\033[4m'   #Underline                                                   |
+INV='\033[7m'   #Inverted                                                    |
+COF='\033[?25l' #Cursor Off                                                  |
+CON='\033[?25h' #Cursor On                                                   |
+#------------------------------{ Functions }---------------------------------+
+# Text positioning, usage: XY 10 10 'Hello World!'                           |
+XY(){ printf "\033[$2;${1}H$3"; }                                           #|
+# Print line, usage: line - 10 | line -= 20 | line 'Hello World!' 20         |
+line(){ printf -v _L %$2s; printf -- "${_L// /$1}"; }                       #|
+# Create sequence like {0..(X-1)}, usage: que 10                             |
+que(){ printf -v _N %$1s; _N=${_N// / 1}; printf "${!_N[*]}"; }             #|
+#----------------------------------------------------------------------------+
+
+
+
+printf $BLD$CUR$RED$BBLU'Hello World!\n'$DEF 
