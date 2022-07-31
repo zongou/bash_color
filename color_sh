@@ -33,6 +33,20 @@ line(){ printf -v _L %$2s; printf -- "${_L// /$1}"; }                       #|
 que(){ printf -v _N %$1s; _N=${_N// / 1}; printf "${!_N[*]}"; }             #|
 #----------------------------------------------------------------------------+
 
+# printf $BLD$CUR$RED$BBLU'Hello World!\n'$DEF
 
+title()   { printf "${BLD}${cyn}${@}${DEF}\n"; }
+info()    { printf "${cyn}${@}${DEF}\n"; }
+success() { printf "${grn}${@:-Successfully done.}${DEF}\n"; }
+warning() { printf "${mgn}Warning: ${@}${DEF}\n"; }
+error()   { printf "${red}ERROR: ${@}${DEF}\n"; }
+abort()   { printf "${RED}ABORT: ${@}${DEF}\n"; exit 1; }
 
-printf $BLD$CUR$RED$BBLU'Hello World!\n'$DEF 
+# == Test color ==
+title "heading"
+info "info"
+success "success"
+warning "warning"
+error "error"
+abort "abort"
+# ================
